@@ -5,14 +5,15 @@ html, body {
 body {
     background-image: url("stars1.gif");
     background-color: #cccccc;
+    overflow:hidden;
 }
 
-well {
-    background-color: #1a1a1a
+.well {
+    background-color: #1a1a1a8a
 }
 
 #wrap {
-min-height: 100%;
+  min-height: 100%;
 }
 
 .footer {
