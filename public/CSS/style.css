@@ -1,8 +1,9 @@
-html, body {
+html,
+body {
     height: auto;
     overflow: auto;
 }
-  
+
 body {
     background-image: url("stars1.gif");
     background-color: #cccccc;
@@ -14,13 +15,32 @@ body {
 }
 
 #wrap {
-  min-height: 100%;
+    min-height: 100%;
 }
 
 .footer {
     position: relative;
-    margin-top: -150px; /* negative value of footer height */
+    margin-top: -150px;
+    /* negative value of footer height */
     height: 150px;
-    clear:both;
-    padding-top:20px;
-  } 
+    clear: both;
+    padding-top: 20px;
+}
+
+.video-container {
+    width: 45%;
+    aspect-ratio: 4 / 3;
+}
+
+.video {
+    width: 100%;
+    height: 100%;
+}
+
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
