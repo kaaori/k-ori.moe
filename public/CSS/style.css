@@ -1,12 +1,12 @@
 html, body {
     height: auto;
     overflow: auto;
-  }
+}
   
 body {
     background-image: url("stars1.gif");
     background-color: #cccccc;
-    overflow:hidden;
+    overflow: auto;
 }
 
 .well {
