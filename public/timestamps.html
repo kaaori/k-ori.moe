@@ -24,7 +24,7 @@
 <body id="top" class="preview" data-spy="scroll" data-target=".subnav" data-offset="80">
     <section  id="main" style="padding-top: 0">
         <div class="page-header">
-            <h1 class="text-center"><img src="img/ie_logo.gif"> timeslots! <img src="img/notepad.gif"></h1>
+            <h1 class="text-center"><img src="img/ie_logo.gif"> the timesloterator! <img src="img/notepad.gif"></h1>
         </div>
 
         <div class="container well">
@@ -38,13 +38,13 @@
                 <div class="span3.5">
                     <label for="timestamp">Date and start time:</label>
                     <div class="control-group">
-                        <input style="width:300px; color:#afafaf" class="input" type="datetime-local" id="datetime"></input>
+                        <input style="width:300px; color:#fafafa" class="input" type="datetime-local" id="datetime"></input>
                     </div>
                 </div>
 
                 <div class="span">
                     <label for="timezone">Timezone:</label>
-                    <select class="input-small" style="color:#fafafa" id="timezone" name="timezone">
+                    <select class="input-small" style="width:120px; color:#fafafa" id="timezone" name="timezone">
                         <option value="US/Eastern">(GMT-05:00) Eastern Time (US & Canada)</option>
                         <option value="US/Central">(GMT-06:00) Central Time (US & Canada)</option>
                         <option value="US/Mountain">(GMT-07:00) Mountain Time (US & Canada)</option>
@@ -180,6 +180,12 @@
         </div>
     </section>
 </body>
-<script type="text/javascript" src="js/dayjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/utc.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/timezone.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/toObject.js"></script>
+<script>dayjs.extend(window.dayjs_plugin_utc)</script>
+<script>dayjs.extend(window.dayjs_plugin_timezone)</script>
+<script>dayjs.extend(window.dayjs_plugin_toObject)</script>
 <script type="text/javascript" src="js/timestamps.js"></script>
 </html>

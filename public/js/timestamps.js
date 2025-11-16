@@ -2,7 +2,6 @@
 /**
  * Some code adapted from: https://github.com/Dot32Dev/discord-timestamp-generator
  */
-
 const dateTimeInput = document.getElementById("datetime");
 const intervalInput = document.getElementById("setInterval");
 const slotCountInput = document.getElementById("slotCount");
@@ -22,7 +21,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 let dateString = "";
 
 let getTimestampType = () => {
-    switch (document.getElementById("type").value) {
+    switch (timestampTypeSelect.value) {
         case "coutdown": return "R>"
         case "hour-short": return "t>"
         case "hour-long": return "T>"
@@ -46,12 +45,14 @@ copyButton.addEventListener("click", () => {
 
 
 let parseTimestamp = () => {
-    let date = dateTimeInput.valueAsDate;
-    let adjustedTzDate = convertTz(date, timezoneSelect.value);
-    console.log(adjustedTzDate)
+
+    let date = dayjs.utc(dateTimeInput.valueAsDate);
+    let adjustedTzDate = dayjs(date).tz(timezoneSelect.value, true).toDate();
+    console.log(adjustedTzDate);
     updateTimestamps(adjustedTzDate)
 
-    previewText.innerHTML = adjustedTzDate
+    previewText.innerText = "Your time: " + adjustedTzDate
+    console.log(timezoneSelect.value)
 }
 
 let updateTimestamps = (input) => {
