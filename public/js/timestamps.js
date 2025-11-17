@@ -12,7 +12,7 @@ const copyButton = document.getElementById("copyTimestampsBtn");
 const timestampsText = document.getElementById("timestamps");
 
 document.addEventListener("DOMContentLoaded", ()=>{
-    dateTimeInput.valueAsDate = roundTimeQuarterHour(convertTz(dayjs(), timezoneSelect.value));
+    dateTimeInput.valueAsDate = roundTimeQuarterHour(dayjs(defaultToLocalTime()).toDate());
     intervalInput.value = 30;
     slotCountInput.value = 5;
     parseTimestamp();
@@ -78,4 +78,11 @@ let roundTimeQuarterHour = (time) => {
     timeToReturn.setSeconds(Math.round(timeToReturn.getSeconds() / 60) * 60);
     timeToReturn.setMinutes(Math.round(timeToReturn.getMinutes() / 15) * 15);
     return timeToReturn;
+}
+
+let defaultToLocalTime = () => {
+    var now = new Date();
+    var offset = now.getTimezoneOffset() * 60000;
+    var adjustedDate = new Date(now.getTime() - offset);
+    return adjustedDate;
 }
