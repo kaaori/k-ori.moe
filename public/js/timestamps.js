@@ -18,8 +18,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
     parseTimestamp();
 })
 
-let dateString = "";
-
 let getTimestampType = () => {
     switch (timestampTypeSelect.value) {
         case "coutdown": return "R>"
@@ -48,11 +46,9 @@ let parseTimestamp = () => {
 
     let date = dayjs.utc(dateTimeInput.valueAsDate);
     let adjustedTzDate = dayjs(date).tz(timezoneSelect.value, true).toDate();
-    console.log(adjustedTzDate);
     updateTimestamps(adjustedTzDate)
 
-    previewText.innerText = "Your time: " + adjustedTzDate
-    console.log(timezoneSelect.value)
+    previewText.innerText = "Your time: " + adjustedTzDate;
 }
 
 let updateTimestamps = (input) => {
