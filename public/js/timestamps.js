@@ -11,12 +11,14 @@ const timestampTypeSelect = document.getElementById("type");
 const copyButton = document.getElementById("copyTimestampsBtn");
 const timestampsText = document.getElementById("timestamps");
 
-document.addEventListener("DOMContentLoaded", ()=>{
-    dateTimeInput.valueAsDate = roundTimeQuarterHour(dayjs(defaultToLocalTime()).toDate());
+document.addEventListener("DOMContentLoaded", () => {
+    const rounded = roundTimeQuarterHour(new Date());
+    // datetime-local wants exactly "YYYY-MM-DDTHH:mm"
+    dateTimeInput.value = dayjs(rounded).format("YYYY-MM-DDTHH:mm");
     intervalInput.value = 30;
     slotCountInput.value = 5;
     parseTimestamp();
-})
+});
 
 let getTimestampType = () => {
     switch (timestampTypeSelect.value) {
@@ -43,25 +45,31 @@ copyButton.addEventListener("click", () => {
 
 
 let parseTimestamp = () => {
-
-    let date = dayjs.utc(dateTimeInput.valueAsDate);
-    let adjustedTzDate = dayjs(date).tz(timezoneSelect.value, true).toDate();
-    updateTimestamps(adjustedTzDate)
-
-    previewText.innerText = "Your time: " + adjustedTzDate;
-}
+    if (!dateTimeInput.value) return;
+    const date = dayjs.tz(dateTimeInput.value, timezoneSelect.value).toDate();
+    previewText.innerText = "Your time: " + new Intl.DateTimeFormat("en-US", {
+        weekday: "long",
+        month: "long",
+        day: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+        timeZoneName: "short",
+        timeZone: timezoneSelect.value,
+    }).format(date);
+    updateTimestamps(date);
+};
 
 let updateTimestamps = (input) => {
-    let slotCount = slotCountInput.value;
+    const slotCount = parseInt(slotCountInput.value, 10) || 1;
+    const interval  = parseInt(intervalInput.value, 10) || 0;
     let inner = "";
-
+    let t = input.getTime();
     for (let i = 0; i < slotCount; i++) {
-        inner += `${i+1}: &lt;t:${parseInt(input.getTime()/1000)}:${getTimestampType()}<br/>`
-        input = new Date(input.getTime()+intervalInput.value*60000);
+        inner += `${i + 1}: &lt;t:${Math.floor(t / 1000)}:${getTimestampType()}<br/>`;
+        t += interval * 60000;
     }
-
     timestampsText.innerHTML = inner;
-}
+};
 
 // https://stackoverflow.com/questions/10087819/convert-date-to-another-timezone-in-javascript
 let convertTz = (date, tzString) => {
